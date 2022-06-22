@@ -1,0 +1,233 @@
+/* Declaring Custom Variable  */
+:root {
+  --box-color: rgba(255, 55, 0, 0.489);
+  --rotate-speed: 30s;
+  --bounce-speed: 1.5s;
+  --stretch-speed: 1.5s;
+}
+body {
+  background-image: radial-gradient(
+    circle at bottom,
+    rgb(7, 48, 252) 35%,
+    rgb(7, 211, 252) 25%,
+    rgb(6, 151, 180) 40%,
+    rgba(233, 240, 241, 0.705)
+  );
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  perspective: 10em; /* Declaring Perspective of view*/
+  perspective-origin: 50% calc(50% - 2.5em);
+}
+
+.main-view {
+  position: relative;
+  transform-style: preserve-3d;
+  animation: rotateCube var(--rotate-speed) infinite linear;
+}
+@keyframes rotateCube {
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+/* Ball Properties 👇 */
+.ball {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 111, 0, 0.703);
+  background: rgb(2, 84, 22);
+  position: absolute;
+  left: -0.5em;
+  bottom: 1em;
+  background-image: radial-gradient(
+    circle at top,
+    rgb(10, 252, 1),
+    rgba(217, 255, 4, 0.719)
+  );
+  animation: ballBounce var(--bounce-speed) infinite ease-out,
+    rotateBall var(--rotate-speed) infinite linear reverse;
+}
+@keyframes ballBounce {
+  0%,
+  100% {
+    bottom: 0.5em;
+  }
+  50% {
+    bottom: 2.75em;
+    animation-timing-function: ease-in;
+  }
+}
+
+@keyframes rotateBall {
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+/* Properties For Shadow of Ball */
+.ball-shadow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(#0007, #0000 50%);
+  animation: ballShadow var(--bounce-speed) infinite ease-out;
+}
+@keyframes ballShadow {
+  0%,
+  8%,
+  93.5%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(2);
+    opacity: 0.5;
+    animation-timing-function: ease-in;
+  }
+}
+
+.cuboid {
+  width: 2em;
+  height: 2em;
+  position: absolute;
+  bottom: -1em;
+  left: -1em;
+  transform-style: preserve-3d;
+  animation: cubeHeight var(--bounce-speed) infinite linear;
+}
+@keyframes cubeHeight {
+  0%,
+  100% {
+    height: 1.5em;
+  }
+  8%,
+  93.5% {
+    height: 2em;
+  }
+}
+
+.left-part,
+.right-part,
+.front-part,
+.back-part {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--box-color);
+  box-shadow: 0 0 0.5em rgba(50, 27, 27, 0.756) inset,
+    0 0 2em rgb(252, 81, 2) inset;
+  border: 1.5px solid yellow;
+  border-radius: 30%;
+}
+.front-part {
+  transform: translateZ(1em);
+}
+.right-part {
+  transform: rotateY(90deg) translateZ(1em);
+}
+.left-part {
+  transform: rotateY(270deg) translateZ(1em);
+}
+.back-part {
+  transform: rotateY(180deg) translateZ(1em);
+}
+.top-part {
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  background: var(--box-color);
+  transform: translateY(-50%) rotateX(90deg);
+  box-shadow: 0 0 1em rgb(50, 27, 27) inset, 0 0 0.5em rgb(252, 81, 2) inset;
+  border: 1.5px solid yellow;
+  border-radius: 30%;
+}
+.bottom-part {
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  background: var(--box-color);
+  bottom: 0;
+  transform: translateY(50%) rotateX(90deg);
+  box-shadow: 0 0 1em rgb(50, 27, 27) inset, 0 0 0.5em rgb(252, 81, 2) inset;
+  border: 1.5px solid yellow;
+  border-radius: 30%;
+}
+.front-part {
+  animation: cubeWidthFront var(--stretch-speed) infinite linear;
+}
+@keyframes cubeWidthFront {
+  0%,
+  100% {
+    width: 2.5em;
+    transform: translateZ(1.25em);
+  }
+  8%,
+  93.5% {
+    width: 2em;
+    transform: translateZ(1em);
+  }
+}
+.right-part {
+  animation: cubeWidthRight var(--stretch-speed) infinite linear;
+}
+@keyframes cubeWidthRight {
+  0%,
+  100% {
+    width: 2.5em;
+    transform: rotateY(90deg) translateZ(1.25em);
+  }
+  8%,
+  93.5% {
+    width: 2em;
+    transform: rotateY(90deg) translateZ(1em);
+  }
+}
+.back-part {
+  animation: cubeWidthBack var(--stretch-speed) infinite linear;
+}
+@keyframes cubeWidthBack {
+  0%,
+  100% {
+    width: 2.5em;
+    transform: rotateY(180deg) translateZ(1.25em);
+  }
+  8%,
+  93.5% {
+    width: 2em;
+    transform: rotateY(180deg) translateZ(1em);
+  }
+}
+.left-part {
+  animation: cubeWidthLeft var(--stretch-speed) infinite linear;
+}
+@keyframes cubeWidthLeft {
+  0%,
+  100% {
+    width: 2.5em;
+    transform: rotateY(270deg) translateZ(1.25em);
+  }
+  8%,
+  93.5% {
+    width: 2em;
+    transform: rotateY(270deg) translateZ(1em);
+  }
+}
+
+.top-part {
+  animation: cubeWidthTop var(--stretch-speed) infinite linear;
+}
+@keyframes cubeWidthtop-part {
+  0%,
+  100% {
+    width: 2.5em;
+  }
+  8%,
+  93.5% {
+    width: 2em;
+  }
+}
